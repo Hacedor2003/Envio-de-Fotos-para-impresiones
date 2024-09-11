@@ -69,16 +69,30 @@ function returnFileSize(number) {
 }
 
 document.getElementById('uploadForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const files = input.files;
+  e.preventDefault();
+  const files = input.files;
 
-    if (files.length > 0) {
-        Array.from(files).forEach(file => {
-            addSolicitudFileHandler(file)
-                .then(() => console.log("Subiendo Archivo"))
-                .catch(error => console.error(error));
-        });
-    }
+  if (files.length > 0) {
+      statusMessage.textContent = "Uploading...";
+      statusMessage.style.color = "blue"; 
+
+      Array.from(files).forEach(file => {
+          addSolicitudFileHandler(file)
+              .then(() => {
+                  console.log("Subiendo Archivo");
+                  statusMessage.textContent = "Files uploaded successfully!"; 
+                  statusMessage.style.color = "green"; 
+              })
+              .catch(error => {
+                  console.error(error);
+                  statusMessage.textContent = "Error uploading file: " + error.message; 
+                  statusMessage.style.color = "red";
+              });
+      });
+  } else {
+      statusMessage.textContent = "No files selected."; 
+      statusMessage.style.color = "red"; 
+  }
 });
 
 async function addSolicitudFileHandler(solicitudData) {
@@ -102,8 +116,8 @@ async function addSolicitudFileHandler(solicitudData) {
         }
 
         const data = await response.json();
-        console.log(data);
+        return data;
     } catch (error) {
-        console.log(error);
+      throw new Error("Failed to upload: " + error.message);
     }
 }
