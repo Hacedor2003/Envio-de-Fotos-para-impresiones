@@ -1,11 +1,11 @@
 @font-face {
   font-family: playwrite;
-  src: url(/public/fonts/Playwrite_CU/PlaywriteCU-VariableFont_wght.ttf);
+  src: url(./public/fonts/Playwrite_CU/PlaywriteCU-VariableFont_wght.ttf);
 }
 
 @font-face {
   font-family: pt_sans;
-  src: url(/public/fonts/PT_Sans/PTSans-Regular.ttf);
+  src: url(./public/fonts/PT_Sans/PTSans-Regular.ttf);
 }
 
 html {
