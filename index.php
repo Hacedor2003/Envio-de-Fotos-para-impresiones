@@ -73,21 +73,21 @@
         </li>
       </ul>
       <br>
-      
+
       <h3>Pago en Linea</h3>
       <ul>
         <li>
-            <p>Número de Tarjeta:</p>
-            <span id="tarjeta">1234-4567-7890</span>
-            <button type="button" onclick="copyToClipboard('tarjeta')">Copiar</button>
+          <p>Número de Tarjeta:</p>
+          <span id="tarjeta">1234-4567-7890</span>
+          <button type="button" onclick="copyToClipboard('tarjeta')">Copiar</button>
         </li>
         <li>
-            <p>En zona:</p>
-            <span id="enZona">@Hacedor</span>
-            <button type="button" onclick="copyToClipboard('enZona')">Copiar</button>
+          <p>En zona:</p>
+          <span id="enZona">@Hacedor</span>
+          <button type="button" onclick="copyToClipboard('enZona')">Copiar</button>
         </li>
-    </ul>
-      
+      </ul>
+
     </aside>
     <footer>
       <p>&copy; 2024 Impresiones Cary. Todos los derechos reservados.</p>
