@@ -19,15 +19,15 @@
       <h2>Seleccione sus fotos</h2>
       <form id="uploadForm" method="post" enctype="multipart/form-data">
         <div>
-            <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
-            <input type="file" id="file_uploads" name="file_uploads" multiple />
+            <label for="image_uploads">Seleccione los archivos</label>
+            <input type="file" id="file_uploads" name="file_uploads" accept=".jpg, .jpeg, .png, .pdf, .doc, .docx" multiple />
         </div>
         <div class="preview">
-            <p>No files currently selected for upload</p>
+            <p>No hay Archivos para enviar</p>
         </div>
         <div id="statusMessage"></div>
         <div>
-            <button type="submit">Submit</button>
+            <button type="submit">Enviar</button>
         </div>
     </form>
         
