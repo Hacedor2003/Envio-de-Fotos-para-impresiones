@@ -14,7 +14,7 @@ function updateFileDisplay() {
     const curFiles = input.files;
     if (curFiles.length === 0) {
         const para = document.createElement("p");
-        para.textContent = "No files currently selected for upload";
+        para.textContent = "No hay archivos seleccionados";
         preview.appendChild(para);
     } else {
         const list = document.createElement("ol");
@@ -23,7 +23,7 @@ function updateFileDisplay() {
         for (const file of curFiles) {
             const listItem = document.createElement("li");
             const para = document.createElement("p");
-            para.textContent = `File name: ${file.name}, file size: ${returnFileSize(file.size)}.`;
+            para.textContent = `Nombre: ${file.name}, tamaño: ${returnFileSize(file.size)}.`;
             listItem.appendChild(para);
             list.appendChild(listItem);
         }
@@ -35,24 +35,23 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
     const files = input.files;
 
     if (files.length > 0) {
-        statusMessage.textContent = "Uploading..."; 
+        statusMessage.textContent = "Subiendo..."; 
         statusMessage.style.color = "blue"; 
 
         Array.from(files).forEach(file => {
             addSolicitudFileHandler(file)
                 .then(() => {
-                    console.log("Subiendo Archivo");
-                    statusMessage.textContent = "Files uploaded successfully!"; 
+                    statusMessage.textContent = "Archivo correctamente enviado! ✅"; 
                     statusMessage.style.color = "green"; 
                 })
                 .catch(error => {
                     console.error(error);
-                    statusMessage.textContent = "Error uploading file: " + error.message; 
+                    statusMessage.textContent = "Error enviando archivo: 💀 " + error.message; 
                     statusMessage.style.color = "red"; 
                 });
         });
     } else {
-        statusMessage.textContent = "No files selected."; 
+        statusMessage.textContent = "No hay archivos seleccionados ✖️."; 
         statusMessage.style.color = "red"; 
     }
 });
@@ -80,7 +79,7 @@ async function addSolicitudFileHandler(solicitudData) {
         const data = await response.json();
         return data; 
     } catch (error) {
-        throw new Error("Failed to upload: " + error.message); 
+        throw new Error("Error al enviar: " + error.message); 
     }
 }
 
